@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+My Profile:	
+<div id='profile-div'>
+  <h3><%= @profile.name %></h3>
+  <%= @profile.sex %> from <%= @profile.from %> looking for <%= @profile.seeks %><br />
+  <div style="float: left;">
+	<%= image_tag @profile.photo %>
+  </div>
+	<div style="height: 73px; padding-top: 9px;">
+	  Age: <%= @profile.age %><br />
+	  Height: <%= @profile.height %><br />
+	  Eyes: <%= @profile.eyes %><br />	  
+	</div>
+  Interests <%= @profile.interests %><br />
+  Page: <a href="<%= @profile.homepage %>"><%= @profile.homepage %></a><br />
+  <%= link_to 'Edit', edit_profile_path(@profile) %> |
+  <%= link_to 'Back', profiles_path %>
+</div>
+	
+
+My Friends:
+<% @friendships.each do |friendship| %>
+	<% if friendship.user_id == current_user.id %>
+		<div id='profile-div'>
+		  <h3><%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.name %></h3>
+		  <%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.sex %> from <%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.from %> looking for <%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.seeks %><br />
+		  <div style="float: left;">
+			<%= image_tag Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.photo %>
+		  </div>
+			<div style="height: 73px; padding-top: 9px;">
+			  Age: <%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.age %><br />
+			  Height: <%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.height %><br />
+			  Eyes: <%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.eyes %><br />	  
+			</div>
+		  Interests <%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.interests %><br />
+		  Page: <a href="<%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.homepage %>"><%= Profile.find(:all, :conditions => { :user_id => friendship.friend_id }).first.homepage %></a><br />
+		  <%= link_to "remove", friendship, :method => :delete %>
+		</div>
+	<% end %>
+<% end %>

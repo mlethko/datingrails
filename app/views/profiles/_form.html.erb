@@ -1,0 +1,75 @@
+<%= form_for(@profile) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">    
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br />
+    <%= f.number_field :age %>
+  </div>
+  <div class="field">
+    <%= f.label :height %><br />
+    <%= f.number_field :height %>
+  </div>
+  <div class="field">
+    <%= f.label :eyes %><br />
+    <%= f.text_field :eyes %>
+  </div>
+  <div class="field">
+    <%= f.label :sex %><br />
+    <%= f.select :sex, options_for_select(%w[Geek Nerdette]) %>
+  </div>
+  <div class="field">
+    <%= f.label :seeks %><br />
+    <%= f.select :seeks, options_for_select(%w[Geek Nerdette]) %>
+  </div>
+  <div class="field">
+    <%= f.label :from %><br />
+    <%= f.text_field :from %>
+  </div>
+  <div class="field">
+    <%= f.label :homepage %><br />
+    <%= f.text_field :homepage %>
+  </div>	  
+  <div class="field">
+    <%= f.label :photo %><br />
+	<%= f.radio_button(:photo, "avatar/a1.jpg") %>
+    <%= image_tag "avatar/a1.jpg" %>
+	<%= f.radio_button(:photo, "avatar/a2.jpg") %>
+    <%= image_tag "avatar/a2.jpg" %>
+	<%= f.radio_button(:photo, "avatar/a3.jpg") %>
+    <%= image_tag "avatar/a3.jpg" %>
+	<%= f.radio_button(:photo, "avatar/a4.jpg") %>
+    <%= image_tag "avatar/a4.jpg" %><br />
+	<%= f.radio_button(:photo, "avatar/a5.jpg") %>
+    <%= image_tag "avatar/a5.jpg" %>
+	<%= f.radio_button(:photo, "avatar/a6.jpg") %>
+    <%= image_tag "avatar/a6.jpg" %>
+	<%= f.radio_button(:photo, "avatar/a7.jpg") %>
+    <%= image_tag "avatar/a7.jpg" %>
+	<%= f.radio_button(:photo, "avatar/a8.jpg") %>
+    <%= image_tag "avatar/a8.jpg" %>
+  </div>
+  <div class="field">
+    <%= f.label :interests %><br />
+    <%= f.text_area :interests %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
